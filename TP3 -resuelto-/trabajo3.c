@@ -16,13 +16,20 @@
 #include <semaphore.h>
 
 
+#include "headers.h"
 
-int Contador[21];
-const char* PalabrasReservadas[3]; //cuantas??
+
+extern int Contador[21];
+extern const char* PalabrasReservadas[3]; //cuantas??
 char buff[1500];
 char buffauxiliar[1500];
 
 
+
+int Buscar(char* palab);
+void Reservadas();
+void CerearContadOr();
+/*
 //funcion cererar contador
 void CerearContador(){
         for(int i=0; i<21;i++){
@@ -58,6 +65,7 @@ int Buscar(char* palab){
         else return -1;
 }
 
+*/
 
 //Funcion Imprimir Palabra Reservada
 int Resto(char* palabra, int indpal, int tam2){
@@ -144,10 +152,10 @@ int Hijo1(int *leido, char *ptr , sem_t *sema, sem_t *sem2){
 int Hijo2(int leido, char *buff){
 
         Reservadas();
-        int ban=0;
+
         char d2[]="|123456789 - 0'¿°!«#$%&/()=—?¡[]_:;,.-{+}´ \n\t";
         char * lineas[256];
-        int j,k=0;
+        int j;
         int indpal;
         int h=0;
         int tambuff;
@@ -188,7 +196,7 @@ int main(int argc, char * const argv[]){
 
         int flagi=0;
         char buffer[2200];
-        char *program_name;
+
         char* opcion_i = NULL;
         int c;
         char *ptr;
