@@ -192,7 +192,7 @@ int main(int argc, char * const argv[]){
         char* opcion_i = NULL;
         int c;
         char *ptr;
-        ptr = mmap(NULL,10,PROT_READ|PROT_WRITE,MAP_ANONYMOUS|MAP_SHARED,-1, 0);
+        ptr = mmap(NULL,(4 * sizeof(sem_t))+ sizeof (int),PROT_READ|PROT_WRITE,MAP_ANONYMOUS|MAP_SHARED,-1, 0);
         int *leido;
         //leido = mmap(NULL,10,PROT_READ|PROT_WRITE,MAP_ANONYMOUS|MAP_SHARED,-1, 0);
         sem_t *sema, *sem2, *sema1, *sema2;
@@ -271,9 +271,19 @@ return 0;
                 while((*leido=read(STDIN_FILENO,buffer,sizeof buffer))>0){
                          // write
                          //write
+                        //printf("-PADRE: ENTRO WHILE \n");
+                       //write(STDOUT_FILENO,ptr,*leido);
+                        sem_post(sema1);
+			sem_post(sema);
+
+			sem_wait(sema2);
+                       sem_wait(sem2);
+                        //write
+                        //write
+                }
+                sem_post(sema);
 
                 }
-        }
 
                
                 wait(NULL);
